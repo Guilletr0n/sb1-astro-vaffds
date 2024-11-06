@@ -1,0 +1,58 @@
+---
+interface Props {
+  title: string;
+  excerpt: string;
+  slug: string;
+  createdAt: string;
+}
+
+const { title, excerpt, slug, createdAt } = Astro.props;
+const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article class="article-card">
+  <h2><a href={`/blog/${slug}`}>{title}</a></h2>
+  <time datetime={createdAt}>{formattedDate}</time>
+  <p>{excerpt}</p>
+</article>
+
+<style>
+  .article-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  time {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+    color: #444;
+    line-height: 1.6;
+  }
+</style>
